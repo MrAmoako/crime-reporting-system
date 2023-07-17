@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { useNavigate } from "react-router-dom";
 import "./Report.css";
 
 // Initialize Firebase
@@ -18,6 +19,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const Report = () => {
+  const navigate = useNavigate();
   const [reporterName, setReporterName] = useState("");
   const [reporterPhone, setReporterPhone] = useState("");
   const [victimName, setVictimName] = useState("");
@@ -25,6 +27,7 @@ const Report = () => {
   const [suspectName, setSuspectName] = useState("");
   const [location, setLocation] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +53,7 @@ const Report = () => {
       setLocation("");
       setDateTime("");
 
-      console.log("Data saved successfully!");
+      setShowPopup(true);
     } catch (error) {
       console.error("Error saving data:", error);
     }
@@ -67,6 +70,12 @@ const Report = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    // Redirect to the homepage
+    navigate("/");
   };
 
   return (
@@ -139,6 +148,14 @@ const Report = () => {
         <button type="submit">Submit</button>
       </form>
       <button onClick={handleFetchData}>Fetch Data</button>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Submission Successful!</h2>
+            <button onClick={handlePopupClose}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
