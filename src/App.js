@@ -5,7 +5,7 @@ import Report from "./Pages/Report";
 import Aboutpage from "./Pages/Aboutpage";
 import Signin from "./Pages/sign-in/Signin";
 import Navbar from "./components/navbar/Navbar";
-import SignUpPage from "./Pages/Sign-up/Signup";
+import SignUpPage from "./Pages/sign-up/Signup";
 import Assigncrime from "./Pages/assigncrime";
 
 function App() {
