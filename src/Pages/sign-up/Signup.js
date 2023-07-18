@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { Link } from "react-router-dom";
 
-import "firebase/auth";
+// import "firebase/auth";
 import "firebase/database";
 
 // Initialize Firebase with your configuration
 const firebaseConfig = {
-  // Your Firebase config object here
-
-  apiKey: "AIzaSyD_ZTkkSPzOrXPA5n_lTcX0U3q16OS-_VU",
+ apiKey: "AIzaSyD_ZTkkSPzOrXPA5n_lTcX0U3q16OS-_VU",
   authDomain: "crime-reporting-system-c4a7b.firebaseapp.com",
   projectId: "crime-reporting-system-c4a7b",
   storageBucket: "crime-reporting-system-c4a7b.appspot.com",
@@ -17,11 +16,18 @@ const firebaseConfig = {
   appId: "1:781871322055:web:35597bab711f0f47f0bfe2",
   measurementId: "G-08E8GHRL5K",
 };
+
+
+
+
+if (!firebase.apps.length) {
 firebase.initializeApp(firebaseConfig);
-const firestore = firebase.firestore();
+}
+// const firestore = firebase.firestore();
 const db = firebase.firestore();
 
 const SignUpPage = () => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [policerank, setpolicerank] = useState("");
@@ -62,8 +68,9 @@ const SignUpPage = () => {
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center">
             Already registered?{" "}
-            <span className="link-primary" onClick={"changeAuthMode"}>
-              Sign In
+            <span className="link-primary">
+            <Link to="/signin">
+              Sign In</Link>
             </span>
           </div>
           <div className="form-group mt-3">
@@ -117,7 +124,7 @@ const SignUpPage = () => {
             </button>
           </div>
           <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
+            {/* Forgot <a href="#">password?</a> */}
           </p>
         </div>
       </form>
